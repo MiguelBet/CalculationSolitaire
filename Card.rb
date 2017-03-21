@@ -1,16 +1,15 @@
-class Card
+class Card < Gtk::Image
   # Suite legend: 1 = hearts, 2 = spades, 3 = diamonds, 4 = clubs
   # cardValue 11 = jack, 12 = queen, 13 = king
   @@cardValue = 0;
   @@cardSuit = 0;
 
   def initialize x, y, value, suit, picture
+    super(:file => picture)
     @x = x
     @y = y
     @cardValue = value
     @cardSuit = suit
-    pixBuf = Gtk::Pixbuf.new :file =>picture
-    cardPic = Gtk::Image.new pixBuf
     @clicked = false
 
   end
