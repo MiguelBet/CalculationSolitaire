@@ -49,7 +49,11 @@ class Board < Gtk::Window
     deck.getTopCard.signal_connect("button_press_event") do |widget, event|
       if event.button == 1
         card = deck.drawCard
+        if card.parent
+          card.parent.remove(card)
+        end
         card.flip_face_up
+        card.set_draggable(true)
         fixed.put(card, 100 + 72 + 8,100);
       end
     end

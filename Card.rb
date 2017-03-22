@@ -17,19 +17,56 @@ class Card < Gtk::EventBox
 
     @image = Gtk::Image.new(:file => "./cardPics/b2fv.png")
     self.add(@image)
-  end
-
-  def move x, y
-    @x = x
-    @y = y
-  end
-  def tryToMove x, y
-    if @clicked
-      @x += x
-      @y += y
+    
+    @dragging = false
+    @draggable = false
+    
+    self.signal_connect("button_press_event") do |widget, event|
+      if event.button == 1 and @draggable
+        parentX, parentY, _w, _h = parent.allocation.to_a
+        x, y, _w, _h = self.allocation.to_a
+        @dragging = true
+        @drag_x = (parentX - x).abs
+        @drag_y = (parentY - y).abs
+        @drag_base_x = event.x_root
+        @drag_base_y = event.y_root
+        
+        # force to top
+        p = self.parent
+        p.remove(self)
+        p.put(self, @drag_x, @drag_y)
+      else
+        false
+      end
+    end
+    
+    self.signal_connect("motion_notify_event") do |widget, event|
+      if @dragging
+        delta_x = event.x_root - @drag_base_x
+        delta_y = event.y_root - @drag_base_y
+        if delta_x != 0 and delta_y != 0
+          self.parent.move(self, @drag_x + delta_x, @drag_y + delta_y)
+        else
+          false
+        end
+      else
+        false
+      end
+    end
+    
+    self.signal_connect("button_release_event") do |widget, event|
+      if event.button == 1
+        @dragging = false
+      else
+        false
+      end
     end
   end
-
+  
+  def set_draggable draggable
+    @draggable = draggable
+  end
+  
   def get_value
     @cardValue
   end

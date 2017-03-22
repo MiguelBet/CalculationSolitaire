@@ -42,6 +42,7 @@ class Deck < Gtk::Fixed
       for j in 1...5
         card = Card.new i, j
         @currentDeck.push(card)
+        card.set_draggable(false)
         self.add(card)
       end
     end
