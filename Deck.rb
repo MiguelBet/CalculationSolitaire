@@ -52,6 +52,9 @@ class Deck < Gtk::Fixed
   def drawCard
     card = @currentDeck.pop
     self.remove(card)
+    if @currentDeck.length == 0
+      self.remove(@topCard)
+    end
     card
   end
 

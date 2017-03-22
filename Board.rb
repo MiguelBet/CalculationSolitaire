@@ -94,7 +94,7 @@ class Board < Gtk::Window
         fixed.put(card, 100 + 72 + 8,100);
         
         card.signal_connect("button_release_event") do |widget, event|
-          if event.button == 1
+          if event.button == 1 and card.get_draggable
             cardX, cardY, _w, _h = card.allocation.to_a
             
             # puts "Card has been dropped at " + cardX.to_s + "," + cardY.to_s

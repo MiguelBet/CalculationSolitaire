@@ -67,6 +67,10 @@ class Card < Gtk::EventBox
     @draggable = draggable
   end
   
+  def get_draggable
+    @draggable
+  end
+  
   def get_value
     @cardValue
   end
