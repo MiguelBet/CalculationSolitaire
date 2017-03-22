@@ -48,11 +48,6 @@ class FoundationPile < Gtk::Fixed
     
     self.addCard(card)
   end
-
-  def to_s
-    puts @cardSequence.join(' ')
-    puts @cardsInPile.join(' ')
-  end
   
   def addCard card
     nextCardInSequence = @cardSequence.first;

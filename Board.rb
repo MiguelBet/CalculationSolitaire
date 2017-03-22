@@ -46,6 +46,43 @@ class Board < Gtk::Window
     deck = Deck.new
     fixed.put(deck, 100, 100)
     
+    foundations = Array.new
+    
+    foundation1 = FoundationPile.new 1, deck.findAndRemoveCard(1)
+    fixed.put foundation1, 400, 100
+    foundations.push(foundation1)
+    
+    foundation2 = FoundationPile.new 2, deck.findAndRemoveCard(2)
+    fixed.put foundation2, 500, 100
+    foundations.push(foundation2)
+    
+    foundation3 = FoundationPile.new 3, deck.findAndRemoveCard(3)
+    fixed.put foundation3, 600, 100
+    foundations.push(foundation3)
+    
+    foundation4 = FoundationPile.new 4, deck.findAndRemoveCard(4)
+    fixed.put foundation4, 700, 100
+    foundations.push(foundation4)
+    
+    wastes = Array.new
+    
+    waste1 = WastePile.new
+    fixed.put waste1, 400, 250
+    wastes.push(waste1)
+    
+    waste2 = WastePile.new
+    fixed.put waste2, 500, 250
+    wastes.push(waste2)
+    
+    waste3 = WastePile.new
+    fixed.put waste3, 600, 250
+    wastes.push(waste3)
+    
+    waste4 = WastePile.new
+    fixed.put waste4, 700, 250
+    wastes.push(waste4)
+    
+    
     deck.getTopCard.signal_connect("button_press_event") do |widget, event|
       if event.button == 1
         card = deck.drawCard
@@ -55,34 +92,57 @@ class Board < Gtk::Window
         card.flip_face_up
         card.set_draggable(true)
         fixed.put(card, 100 + 72 + 8,100);
+        
+        card.signal_connect("button_release_event") do |widget, event|
+          if event.button == 1
+            cardX, cardY, _w, _h = card.allocation.to_a
+            
+            # puts "Card has been dropped at " + cardX.to_s + "," + cardY.to_s
+            
+            placed = false
+            
+            if !placed
+              for foundation in foundations
+                x, y, w, h = foundation.allocation.to_a
+                h = 96
+                # puts "Trying foundation " + foundation.to_s + " (" + x.to_s + "," + y.to_s + ". " + w.to_s + "," + h.to_s + ")"
+                if (x - cardX).abs < w and (y - cardY).abs < h
+                  # puts "Card has been dropped on foundation " + foundation.to_s
+                  
+                  card.parent.move(card, x, y);
+                  card.set_draggable(false);
+                  
+                  placed = true
+                  break
+                end
+              end
+            end
+            
+            if !placed
+              for waste in wastes
+                x, y, w, h = waste.allocation.to_a
+                # puts "Trying waste " + waste.to_s + " (" + x.to_s + "," + y.to_s + ". " + w.to_s + "," + h.to_s + ")"
+                if (x - cardX).abs < w and (y - cardY).abs < h
+                  # puts "Card has been dropped on waste " + waste.to_s
+                  
+                  card.parent.move(card, x, y); # add waste pile depth
+                  card.set_draggable(false);
+                  
+                  placed = true
+                  break
+                end
+              end
+            end
+            
+            if !placed
+              # puts "Card has not been dropped on a waste or foundation"
+              card.parent.move(card, 100 + 72 + 8, 100)
+            end
+          end
+        end
       end
     end
-
-
-    foundation1 = FoundationPile.new 1, deck.findAndRemoveCard(1)
-    fixed.put foundation1, 400, 100
     
-    foundation2 = FoundationPile.new 2, deck.findAndRemoveCard(2)
-    fixed.put foundation2, 500, 100
-    
-    foundation3 = FoundationPile.new 3, deck.findAndRemoveCard(3)
-    fixed.put foundation3, 600, 100
-    
-    foundation4 = FoundationPile.new 4, deck.findAndRemoveCard(4)
-    fixed.put foundation4, 700, 100
-    
-    
-    waste1 = WastePile.new
-    fixed.put waste1, 400, 250
-    
-    waste2 = WastePile.new
-    fixed.put waste2, 500, 250
-    
-    waste3 = WastePile.new
-    fixed.put waste3, 600, 250
-    
-    waste4 = WastePile.new
-    fixed.put waste4, 700, 250
     
     # topCard = deck.drawCard
     # fixed.put topCard, 180, 100
