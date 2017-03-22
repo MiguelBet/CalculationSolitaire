@@ -17,8 +17,8 @@ class Board < Gtk::Window
   def init_ui
     @running == true
     
-    blue = Gdk::Color.parse("#CFFCFF")
-    override_background_color(Gtk::StateFlags::NORMAL, Gdk::RGBA.new(0.1,0.6,0.1,1.0))
+    blue = Gdk::Color.parse("#CFFCFF") #is this not used????
+
     
     #Required window attributes
     set_title "Calculation Solitaire"
@@ -29,23 +29,26 @@ class Board < Gtk::Window
     set_default_height 600
     set_resizable false
     set_window_position :center
+    override_background_color(Gtk::StateFlags::NORMAL, Gdk::RGBA.new(0.1,0.6,0.1,1.0))
 
     #Object that fixes other objects in the window
     fixed = Gtk::Fixed.new
     add fixed
 
-    #Button to end the game
+    #Button to return to title screen
     endGameButton = Gtk::Button.new :label =>'End Game'
     endGameButton.set_size_request 80,30
     fixed.put endGameButton, 750, 25
     endGameButton.signal_connect('clicked'){   #Button Action
-      Gtk.main_quit
+      window.destroy
+      window = TitlePage.new
     }
 
     #creates the deck
     deck = Deck.new
     fixed.put(deck, 100, 100)
-    
+
+    #creates the foundations
     foundations = Array.new
     
     foundation1 = FoundationPile.new 1, deck.findAndRemoveCard(1)
@@ -63,7 +66,8 @@ class Board < Gtk::Window
     foundation4 = FoundationPile.new 4, deck.findAndRemoveCard(4)
     fixed.put foundation4, 700, 100
     foundations.push(foundation4)
-    
+
+    #creates the waste
     wastes = Array.new
     
     waste1 = WastePile.new
@@ -150,21 +154,7 @@ class Board < Gtk::Window
         end
       end
     end
-    
-    
-    # topCard = deck.drawCard
-    # fixed.put topCard, 180, 100
-    # topOfDeck = Card.new 15, 15
-    # fixed.put topOfDeck, 100, 100
-=begin
-    buildable = Gtk::Builder.new
 
-    topOfDeck.signal_connect('button_press_event'){   #Button Action
-      topCard = deck.drawCard
-
-    }
-    fixed.add_child buildable, topCard, Card
-=end
     show_all
   end
 end

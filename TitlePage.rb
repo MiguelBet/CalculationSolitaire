@@ -21,17 +21,18 @@ class TitlePage < Gtk::Window
     set_default_width 900
     set_default_height 600
     set_resizable false
+    override_background_color(Gtk::StateFlags::NORMAL, Gdk::RGBA.new(0.1,0.6,0.1,1.0))
 
     #Object that fixes other objects in the window
     fixed = Gtk::Fixed.new
     add fixed
 
-    #Lable for calculation solitaire
-    mainLable = Gtk::Label.new "Calculation Solitaire"
-    fixed.put mainLable, 225, 70
+    #Image for Calculation Solitaire
+    image = Gtk::Image.new(:file => "./cardPics/text.png")
+    fixed.put image, 75, 250
 
-    #Button to end the game
-    endGameButton = Gtk::Button.new :label =>'End Game'
+    #Button to close the game
+    endGameButton = Gtk::Button.new :label =>'Close Game'
     endGameButton.set_size_request 80,30
     fixed.put endGameButton, 750, 25
     endGameButton.signal_connect('clicked'){   #Button Action
