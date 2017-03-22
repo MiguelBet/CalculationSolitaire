@@ -6,11 +6,21 @@ class Deck < Gtk::Fixed
   
   def initialize
     super
-    set_size_request(80 + 72, 96)
-    @currentDeck = Array.new
+    set_size_request(72, 96)
+    
     self.createDeck
+    
+    @topCard = Card.new(0,0)
+    self.put(@topCard, 0, 0)
+    
+    @emptySpotImage = Gtk::Image.new(:file => "./cardPics/blank.png")
+    self.put(@emptySpotImage, 72 + 8, 0)
   end
-
+  
+  def getTopCard
+    @topCard
+  end
+  
   def pop
     @empty = true
     #return @cards.last
@@ -25,41 +35,23 @@ class Deck < Gtk::Fixed
     end
 
   end
-
+  
   def createDeck
+    @currentDeck = Array.new
     for i in 1...14
       for j in 1...5
         card = Card.new i, j
         @currentDeck.push(card)
-        #puts "Putting " + card.to_s
-
-
-        #self.put(card, 100, 100)
-
-=begin
-        card.signal_connect("button_press_event") do |widget, event|
-          if Gdk::EventType::BUTTON_PRESS==event.event_type
-            false
-          end
-          self.drawCard
-        end
-=end
-
-
+        self.add(card)
       end
     end
     @currentDeck.shuffle!
   end
 
   def drawCard
-    #puts "drawCard"
-    card = @currentDeck.first()
-    if card
-      #self.remove(card)
-      card.flip_face_up
-      #self.put(card, 180, 100);
-    end
-    return card
+    card = @currentDeck.pop
+    self.remove(card)
+    card
   end
 
   def nextCard
@@ -88,6 +80,7 @@ class Deck < Gtk::Fixed
         cardToSend = @currentDeck[i]
         @currentDeck[i] = nil
         @currentDeck.compact!
+        self.remove(cardToSend)
         return cardToSend
       end
     end

@@ -15,16 +15,6 @@ class Card < Gtk::EventBox
     @clicked = false
     @faceUp = false
 
-=begin
-    self.signal_connect("button_press_event") do
-      #puts "Clicked."
-      if !@faceUp
-        self.flip_face_up
-        @faceUp = true
-      end
-    end
-=end
-
     @image = Gtk::Image.new(:file => "./cardPics/b2fv.png")
     self.add(@image)
   end
