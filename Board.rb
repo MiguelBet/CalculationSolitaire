@@ -109,11 +109,16 @@ class Board < Gtk::Window
                 if (x - cardX).abs < w and (y - cardY).abs < h
                   # puts "Card has been dropped on foundation " + foundation.to_s
                   
-                  card.parent.move(card, x, y);
-                  card.set_draggable(false);
-                  
-                  placed = true
-                  break
+                  p = card.parent
+                  p.remove(card)
+                  canMove = foundation.addCard(card)
+                  if canMove
+                    placed = true
+                    card.set_draggable(false);
+                    break
+                  else
+                    placed = false
+                  end
                 end
               end
             end
@@ -136,7 +141,10 @@ class Board < Gtk::Window
             
             if !placed
               # puts "Card has not been dropped on a waste or foundation"
-              card.parent.move(card, 100 + 72 + 8, 100)
+              if card.parent
+                card.parent.remove(card)
+              end
+              fixed.put(card, 100 + 72 + 8, 100)
             end
           end
         end

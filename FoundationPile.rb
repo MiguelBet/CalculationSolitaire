@@ -64,7 +64,10 @@ class FoundationPile < Gtk::Fixed
       @cardsInPile.push(card)
       card.flip_face_up
       self.put(card, 0, 0)
+      @currentSequence += 1
+      return true
     end
+    false
   end
   
   def valueToString value
