@@ -14,6 +14,8 @@ class Board < Gtk::Window
   end
 
   def init_ui
+    @running == true
+
     #Required window attributes
     set_title "Calculation Solitaire"
     signal_connect "destroy" do
@@ -42,7 +44,7 @@ class Board < Gtk::Window
 
     #creates the deck
     deck = Deck.new
-    deck.createDeck
+    #deck.createDeck
 
 
 
@@ -60,8 +62,18 @@ class Board < Gtk::Window
     fixed.put foundation4.topCard, 700, 100
 
     topCard = deck.drawCard
-    fixed.put topCard, 100,100
+    fixed.put topCard, 180, 100
+    topOfDeck = Card.new 15, 15
+    fixed.put topOfDeck, 100, 100
+=begin
+    buildable = Gtk::Builder.new
 
+    topOfDeck.signal_connect('button_press_event'){   #Button Action
+      topCard = deck.drawCard
+
+    }
+    fixed.add_child buildable, topCard, Card
+=end
     show_all
   end
 end

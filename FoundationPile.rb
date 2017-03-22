@@ -15,8 +15,10 @@ class FoundationPile < Gtk::EventBox
     for i in 1...4
       @cardSequence.map! { |x| x > 13 ? (x-13) : x}.flatten!
     end
+
     @cardsInPile.push card
     @cardsInPile[0].flip_face_up
+
     @cardSequence[0] = nil
     @cardSequence.compact!
   end
