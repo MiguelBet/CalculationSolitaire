@@ -1,3 +1,8 @@
+#!/usr/bin/ruby
+
+require './Card.rb'
+require 'gtk3'
+
 class Card < Gtk::EventBox
   # Suite legend: 1 = hearts, 2 = spades, 3 = diamonds, 4 = clubs
   # cardValue 11 = jack, 12 = queen, 13 = king
@@ -15,7 +20,7 @@ class Card < Gtk::EventBox
     @faceUp = false
     
     self.signal_connect("button_press_event") do
-      puts "Clicked."
+      #puts "Clicked."
       if !@faceUp
         self.flip_face_up
         @faceUp = true

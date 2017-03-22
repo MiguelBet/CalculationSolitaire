@@ -61,15 +61,16 @@ class Deck
   end
 
   def findAndRemoveCard value
-    @currentDeck.each_index do |i|
-      if @currentDeck[i].value == value
-        card = @currentDeck[i]
+
+    for i in 1...@currentDeck.length
+      if @currentDeck[i].get_value == value
+        cardToSend = @currentDeck[i]
         @currentDeck[i] = nil
         @currentDeck.compact!
-        return card
+        return cardToSend
       end
-      puts "No card of this value"
     end
+      puts "No card of this value"
   end
 
   def draw screen

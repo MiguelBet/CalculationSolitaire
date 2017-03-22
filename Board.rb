@@ -4,9 +4,9 @@ require 'gtk3'
 require 'rubygems'
 require './Deck.rb'
 require './Card.rb'
+require './FoundationPile.rb'
 
 class Board < Gtk::Window
-  @@topCard
 
   def initialize
     super
@@ -29,8 +29,8 @@ class Board < Gtk::Window
     add fixed
 
     #Lable for calculation solitaire
-    mainLable = Gtk::Label.new "Board"
-    fixed.put mainLable, 300, 80
+    mainLable = Gtk::Label.new "Game Board"
+    fixed.put mainLable, 250, 50
 
     #Button to end the game
     endGameButton = Gtk::Button.new :label =>'End Game'
@@ -44,9 +44,23 @@ class Board < Gtk::Window
     deck = Deck.new
     deck.createDeck
 
-    card = deck.drawCard
-    fixed.put card, 100,100
 
+
+    foundation1 = FoundationPile.new 1, deck.findAndRemoveCard(1)
+    foundation1.to_s
+    fixed.put foundation1.topCard, 400, 100
+    foundation2 = FoundationPile.new 2, deck.findAndRemoveCard(2)
+    foundation2.to_s
+    fixed.put foundation2.topCard, 500, 100
+    foundation3 = FoundationPile.new 3, deck.findAndRemoveCard(3)
+    foundation3.to_s
+    fixed.put foundation3.topCard, 600, 100
+    foundation4 = FoundationPile.new 4, deck.findAndRemoveCard(4)
+    foundation4.to_s
+    fixed.put foundation4.topCard, 700, 100
+
+    topCard = deck.drawCard
+    fixed.put topCard, 100,100
 
     show_all
   end
