@@ -5,22 +5,13 @@ class Card < Gtk::EventBox
   def initialize value, suit
     super()
     
-    @image = Gtk::Image.new(:file => "./cardPics/b2fv.png");
-    self.add(@image)
-    
     @cardValue = value
     @cardSuit = suit
     @clicked = false
     
     @faceUp = false
-    
-    self.signal_connect("button_press_event") do
-      puts "Clicked."
-      if !@faceUp
-        self.flip_face_up
-        @faceUp = true
-      end
-    end
+    @image = Gtk::Image.new(:file => "./cardPics/b2fv.png");
+    self.add(@image);
   end
 
   def move x, y
@@ -43,24 +34,20 @@ class Card < Gtk::EventBox
   end
   
   def flip_face_up
-    # if @faceUp
-      file = "./cardPics/"
-      file.concat @cardValue.to_s
-      file.concat "_"
-      if @cardSuit == 1
-        file.concat "hearts"
-      elsif @cardSuit == 2
-        file.concat "spade"
-      elsif @cardSuit == 3
-        file.concat "diamond"
-      elsif @cardSuit == 4
-        file.concat "clubs"
-      end
-      file.concat ".png"
-      @image.set_file(file)
-    # elsif
-      # @image.set_file("./cardPics/b2fv.png")
-    # end
+    file = "./cardPics/"
+    file.concat @cardValue.to_s
+    file.concat "_"
+    if @cardSuit == 1
+      file.concat "hearts"
+    elsif @cardSuit == 2
+      file.concat "spade"
+    elsif @cardSuit == 3
+      file.concat "diamond"
+    elsif @cardSuit == 4
+      file.concat "clubs"
+    end
+    file.concat ".png"
+    @image.set_file(file)
   end
 
   def to_s

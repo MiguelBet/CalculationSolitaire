@@ -42,12 +42,8 @@ class Board < Gtk::Window
 
     #creates the deck
     deck = Deck.new
-    deck.createDeck
-
-    card = deck.drawCard
-    fixed.put card, 100,100
-
-
+    fixed.put deck, 100, 100
+    
     show_all
   end
 end

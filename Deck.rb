@@ -2,24 +2,13 @@
 
 require './Card.rb'
 require 'gtk3'
-class Deck
-
+class Deck < Gtk::Fixed
+  
   def initialize
+    super
+    set_size_request(80 + 72, 96)
     @currentDeck = Array.new
-    @x = 5
-    @y = 10
-    @surface = Gtk::Image.new :file => "./cardPics/b2fv.png"
-    #@xw = @surface.width
-    #@yw = @surface.height
-    @clicked = false
-    @empty = false
-  end
-  def click? x, y
-    if x > @x and x < @x + @xw and y > @y and y < @y + @yw
-      @cards.last.move @xs+4/2, @ys+4/2
-      puts "Move card!"
-      @empty = false
-    end
+    self.createDeck
   end
 
   def pop
@@ -39,17 +28,31 @@ class Deck
 
   def createDeck
     for i in 1...13
-      for j in 1...4
-        #image = Gtk::Image.new :file => file
+      for j in 1...5
         card = Card.new i, j
         @currentDeck.push(card)
+        puts "Putting " + card.to_s
+        self.put(card, 0, 0)
+        
+        card.signal_connect("button_press_event") do |widget, event|
+          if Gdk::EventType::BUTTON2_PRESS==event.event_type
+            false
+          end
+          self.drawCard
+        end
       end
     end
     @currentDeck.shuffle!
   end
 
   def drawCard
-    return @currentDeck.pop
+    puts "drawCard"
+    card = @currentDeck.pop
+    if card
+      self.remove(card)
+      card.flip_face_up
+      self.put(card, 80, 0);
+    end
   end
 
   def pushCard card
