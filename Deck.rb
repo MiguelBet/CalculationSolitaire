@@ -40,24 +40,8 @@ class Deck
   def createDeck
     for i in 1...13
       for j in 1...4
-        # Determining which file to pull
-        file = "./cardPics/"
-        file.concat i.to_s
-        file.concat "_"
-        if j == 1
-          file.concat "hearts"
-        elsif j == 2
-          file.concat "spade"
-        elsif j == 3
-          file.concat "diamond"
-        elsif j == 4
-          file.concat "clubs"
-        end
-        file.concat ".png"
-
-
         #image = Gtk::Image.new :file => file
-        card = Card.new 0, 0, i, j, file
+        card = Card.new i, j
         @currentDeck.push(card)
       end
     end

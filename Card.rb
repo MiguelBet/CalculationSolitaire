@@ -1,17 +1,26 @@
-class Card < Gtk::Image
+class Card < Gtk::EventBox
   # Suite legend: 1 = hearts, 2 = spades, 3 = diamonds, 4 = clubs
   # cardValue 11 = jack, 12 = queen, 13 = king
-  @@cardValue = 0;
-  @@cardSuit = 0;
 
-  def initialize x, y, value, suit, picture
-    super(:file => picture)
-    @x = x
-    @y = y
+  def initialize value, suit
+    super()
+    
+    @image = Gtk::Image.new(:file => "./cardPics/b2fv.png");
+    self.add(@image)
+    
     @cardValue = value
     @cardSuit = suit
     @clicked = false
-
+    
+    @faceUp = false
+    
+    self.signal_connect("button_press_event") do
+      puts "Clicked."
+      if !@faceUp
+        self.flip_face_up
+        @faceUp = true
+      end
+    end
   end
 
   def move x, y
@@ -24,14 +33,6 @@ class Card < Gtk::Image
       @y += y
     end
   end
-  def click? x, y
-    if x > @x and x < @x + @xw and y > @y and y < @y + @yw
-      @clicked = true
-      return true
-    else
-      return false
-    end
-  end
 
   def get_value
     @cardValue
@@ -39,6 +40,27 @@ class Card < Gtk::Image
 
   def get_suit
     @cardSuit
+  end
+  
+  def flip_face_up
+    # if @faceUp
+      file = "./cardPics/"
+      file.concat @cardValue.to_s
+      file.concat "_"
+      if @cardSuit == 1
+        file.concat "hearts"
+      elsif @cardSuit == 2
+        file.concat "spade"
+      elsif @cardSuit == 3
+        file.concat "diamond"
+      elsif @cardSuit == 4
+        file.concat "clubs"
+      end
+      file.concat ".png"
+      @image.set_file(file)
+    # elsif
+      # @image.set_file("./cardPics/b2fv.png")
+    # end
   end
 
   def to_s
