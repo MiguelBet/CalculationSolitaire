@@ -24,7 +24,7 @@ class Card < Gtk::EventBox
     @dragging = false
     @draggable = false
 
-    #logic to get card coordinates after click and hold
+    #to get card coordinates after click and hold
     self.signal_connect("button_press_event") do |widget, event|
       if event.button == 1 and @draggable
         parentX, parentY, _w, _h = parent.allocation.to_a #gets (x,y), width and height of parent container
@@ -48,7 +48,7 @@ class Card < Gtk::EventBox
       end
     end
 
-    #logic to move a card after click and hold
+    #to move a card after click and hold
     self.signal_connect("motion_notify_event") do |widget, event|
       if @dragging
         delta_x = event.x_root - @drag_base_x #x coordinate difference using the mouse coordinates and card coordinates
@@ -72,7 +72,7 @@ class Card < Gtk::EventBox
       end
     end
 
-    #logic to make the card undraggable after click release
+    #to make the card undraggable after click release
     self.signal_connect("button_release_event") do |widget, event|
       if event.button == 1
         @dragging = false
