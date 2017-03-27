@@ -4,6 +4,7 @@ require 'gtk3'
 require './Board.rb'
 require './Deck.rb'
 require './Card.rb'
+require './Rules.rb'
 
 class TitlePage < Gtk::Window
   def initialize
@@ -46,6 +47,15 @@ class TitlePage < Gtk::Window
     startGameBtn.signal_connect('clicked'){   #Button Action
       window.destroy
       window = Board.new
+    }
+
+    #Button to show the rules
+    ruleButton = Gtk::Button.new :label => 'Rules'
+    ruleButton.set_size_request 80, 30
+    fixed.put ruleButton, 500, 25
+    ruleButton.signal_connect('clicked'){ #Button action
+      window.destroy
+      window = Rules.new
     }
 
     show_all
