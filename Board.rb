@@ -85,8 +85,7 @@ class Board < Gtk::Window
     waste4 = WastePile.new
     fixed.put waste4, 700, 250
     wastes.push(waste4)
-    
-    
+
     deck.getTopCard.signal_connect("button_press_event") do |widget, event|
       if event.button == 1
         card = deck.drawCard
@@ -98,12 +97,13 @@ class Board < Gtk::Window
         fixed.put(card, 100 + 72 + 8,100);
         
         card.signal_connect("button_release_event") do |widget, event|
+          placed = false
           if event.button == 1 and card.get_draggable
             cardX, cardY, _w, _h = card.allocation.to_a
             
             # puts "Card has been dropped at " + cardX.to_s + "," + cardY.to_s
             
-            placed = false
+
             
             if !placed
               for foundation in foundations
@@ -134,7 +134,7 @@ class Board < Gtk::Window
                 if (x - cardX).abs < w and (y - cardY).abs < h
                   # puts "Card has been dropped on waste " + waste.to_s
                   
-                  card.parent.move(card, x, y); # add waste pile depth
+                  card.parent.move(card, x , y); # add waste pile depth
                   card.set_draggable(false);
                   
                   placed = true
@@ -143,15 +143,20 @@ class Board < Gtk::Window
               end
             end
             
-            if !placed
-              # puts "Card has not been dropped on a waste or foundation"
-              if card.parent
-                card.parent.remove(card)
-              end
-              fixed.put(card, 100 + 72 + 8, 100)
+
+          end
+
+          #VERY JANKY
+          #WORKS WHEN MOUSE LEAVES CARD SLOWLY AND DOES AFFECT THE WASTE PILE
+          #ALSO IF A CARD IS DRAWN FROM THE DECK, IT WONT BE DRAGGABLE UNTIL THE PREVIOUS CARD IS MOVED
+          card.signal_connect ("leave-notify-event") do |widget, event|
+            if card.parent
+              card.parent.remove(card)
             end
+            fixed.put(card, 100 + 72 + 8, 100)
           end
         end
+
       end
     end
 

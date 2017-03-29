@@ -34,15 +34,12 @@ class Card < Gtk::EventBox
         @drag_base_y = event.y_root #gets y value of mouse on screen
 
 
-
-
-
-          @drag_x = (parentX - @x).abs #determines difference in x coordinates of parent container and card
-          @drag_y = (parentY - @y).abs #determines difference in y coordinates of parent container and card
-          # force moved card to top of deck after single click
-          p = self.parent
-          p.remove(self)
-          p.put(self, @drag_x, @drag_y)
+        @drag_x = (parentX - @x).abs #determines difference in x coordinates of parent container and card
+        @drag_y = (parentY - @y).abs #determines difference in y coordinates of parent container and card
+        # force moved card to top of deck after single click
+        p = self.parent
+        p.remove(self)
+        p.put(self, @drag_x, @drag_y)
       else
         false
       end
@@ -60,15 +57,6 @@ class Card < Gtk::EventBox
         end
       else
         false
-      end
-    end
-
-    #TRYING TO MAKE THE CARD GO BACK TO THE DECK WHEN MOUSE LEAVES CARD
-    self.signal_connect ("leave-notify-event") do |widget, event|
-      if @dragging
-          self.parent.move(self, @x, @y) #moves the card
-        @dragging = false
-      else
       end
     end
 
