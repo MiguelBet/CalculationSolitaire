@@ -18,7 +18,6 @@ class WastePile < Gtk::Fixed
 	end
 	
 	def addCard card
-		puts "adding card " + card.to_s
 		@cards.push(card)
 		if card.parent
 			card.parent.remove(card)
@@ -28,15 +27,11 @@ class WastePile < Gtk::Fixed
 		
 		self.removeEventBox
 		self.addEventBox
-		
-		puts self.to_s + "@cards.length: " + @cards.length.to_s
 	end
 	
 	def removeCard
-		puts self.to_s + " @cards.length: " + @cards.length.to_s
 		card = @cards.pop
 		if card
-			puts "removing card " + card.to_s
 			self.remove(card)
 			card
 		else

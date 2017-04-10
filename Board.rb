@@ -141,9 +141,9 @@ class Board < Gtk::Window
                   # if topCard
                   #   topCard.set_draggable(false)
                   # end
-                  puts "waste.addCard inside of drawing off of deck"
                   waste.addCard(card)
                   
+                  card.set_draggable(false);
                   placed = true
                   break
                 end
@@ -158,7 +158,6 @@ class Board < Gtk::Window
               #put back on face-up deck slot
               fixed.put(card, 100 + 72 + 8, 100)
             else
-              puts "successful move " + handlerId.to_s
               cardRemovedFromDeck = false
               card.signal_handler_disconnect(handlerId)
             end
@@ -169,16 +168,8 @@ class Board < Gtk::Window
     
     wastes.each do |waste|
       
-      waste.getEventBox.signal_connect("button_press_event") do |wiget, event| #dragging off of waste onto foundation
-        puts "eb1 " + waste1.getEventBox.to_s + " " + waste1.getEventBox.allocation.to_a.to_s
-        puts "eb2 " + waste2.getEventBox.to_s + " " + waste2.getEventBox.allocation.to_a.to_s
-        puts "eb3 " + waste3.getEventBox.to_s + " " + waste3.getEventBox.allocation.to_a.to_s
-        puts "eb4 " + waste4.getEventBox.to_s + " " + waste4.getEventBox.allocation.to_a.to_s
-        
-        
-        puts "signal2 " + wiget.to_s + " -> " + waste.to_s
+      waste.getEventBox.signal_connect("button_press_event") do |wiget, event| #dragging off of waste onto foundation       
         if event.button == 1
-          puts "removeCard"
           card = waste.removeCard
           
           if card
@@ -218,11 +209,8 @@ class Board < Gtk::Window
                 end
                 
                 if !placed
-                  puts "waste.addCard inside of pulling off waste"
                   waste.addCard(card)
                   card.set_draggable(false)
-                else
-                  puts "successful move"
                 end
               end
             end
