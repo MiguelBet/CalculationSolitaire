@@ -97,9 +97,10 @@ class Board < Gtk::Window
         end
         card.flip_face_up
         card.set_draggable(true)
-        fixed.put(card, 100 + 72 + 8,100);
+        fixed.put(card, 100 + 72 + 8,100); #on face-up deck
         
-        card.signal_connect("button_release_event") do |widget, event|
+        handlerId = card.signal_connect("button_release_event") do |widget, event|
+          puts "release2"
           if event.button == 1 and card.get_draggable
             cardX, cardY, _w, _h = card.allocation.to_a
             
@@ -136,8 +137,12 @@ class Board < Gtk::Window
                 if (x - cardX).abs < w and (y - cardY).abs < h
                   # puts "Card has been dropped on waste " + waste.to_s
                   
-                  card.parent.move(card, x, y); # add waste pile depth
-                  card.set_draggable(false);
+                  # topCard = waste.getTopCard
+                  # if topCard
+                  #   topCard.set_draggable(false)
+                  # end
+                  puts "waste.addCard inside of drawing off of deck"
+                  waste.addCard(card)
                   
                   placed = true
                   break
@@ -153,7 +158,80 @@ class Board < Gtk::Window
               #put back on face-up deck slot
               fixed.put(card, 100 + 72 + 8, 100)
             else
+              puts "successful move " + handlerId.to_s
               cardRemovedFromDeck = false
+              card.signal_handler_disconnect(handlerId)
+            end
+          end
+        end
+      end
+    end
+    
+    wastes.each do |waste|
+      
+      waste.getEventBox.signal_connect("button_press_event") do |wiget, event| #dragging off of waste onto foundation
+        puts "eb1 " + waste1.getEventBox.to_s + " " + waste1.getEventBox.allocation.to_a.to_s
+        puts "eb2 " + waste2.getEventBox.to_s + " " + waste2.getEventBox.allocation.to_a.to_s
+        puts "eb3 " + waste3.getEventBox.to_s + " " + waste3.getEventBox.allocation.to_a.to_s
+        puts "eb4 " + waste4.getEventBox.to_s + " " + waste4.getEventBox.allocation.to_a.to_s
+        
+        
+        puts "signal2 " + wiget.to_s + " -> " + waste.to_s
+        if event.button == 1
+          puts "removeCard"
+          card = waste.removeCard
+          
+          if card
+            x, y, _w, _h = card.allocation.to_a
+            fixed.put(card, x, y)
+            waste.removeEventBox
+            
+            card.set_draggable(true)
+            card.signal_emit("button_press_event", event)
+            
+            leaveHandlerId = nil
+            handlerId = card.signal_connect("button_release_event") do |widget, event|
+              if event.button == 1 and card.get_draggable
+                card.signal_handler_disconnect(handlerId)
+                card.signal_handler_disconnect(leaveHandlerId)
+                waste.addEventBox
+                cardX, cardY, _w, _h = card.allocation.to_a
+                
+                placed = false
+                for foundation in foundations
+                  x, y, w, h = foundation.allocation.to_a
+                  h = 96
+                  # puts "Trying foundation " + foundation.to_s + " (" + x.to_s + "," + y.to_s + ". " + w.to_s + "," + h.to_s + ")"
+                  if (x - cardX).abs < w and (y - cardY).abs < h
+                    # puts "Card has been dropped on foundation " + foundation.to_s
+                    
+                    fixed.remove(card)
+                    canMove = foundation.addCard(card)
+                    if canMove
+                      placed = true
+                      card.set_draggable(false);
+                      break
+                    else
+                      placed = false
+                    end
+                  end
+                end
+                
+                if !placed
+                  puts "waste.addCard inside of pulling off waste"
+                  waste.addCard(card)
+                  card.set_draggable(false)
+                else
+                  puts "successful move"
+                end
+              end
+            end
+            
+            leaveHandlerId = card.signal_connect("leave-notify-event") do |widget, event|
+              card.signal_handler_disconnect(leaveHandlerId)
+              card.signal_handler_disconnect(handlerId)
+              waste.addCard(card)
+              card.set_draggable(false)
             end
           end
         end
