@@ -5,6 +5,7 @@ require 'gtk3'
 
 class FoundationPile < Gtk::Fixed
 
+
   def initialize order, card
     super()
     @cardsInPile = Array.new
@@ -12,6 +13,7 @@ class FoundationPile < Gtk::Fixed
     
     @cardSequence = Array.new
     @sequenceLabels = Array.new
+    @done = false
     
     i = order - 1
     pos = 0
@@ -65,11 +67,25 @@ class FoundationPile < Gtk::Fixed
       card.flip_face_up
       self.put(card, 0, 0)
       @currentSequence += 1
+      if card.get_value == 13
+        self.setDone
+      end
       return true
     end
     false
   end
-  
+
+  def setDone
+    @done = true
+  end
+
+  def getDone
+    if @done == true
+      return true
+    end
+    return false
+  end
+
   def valueToString value
     case value
       when 1

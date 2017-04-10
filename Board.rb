@@ -15,7 +15,6 @@ class Board < Gtk::Window
   end
 
   def init_ui
-    @running == true
     
     blue = Gdk::Color.parse("#CFFCFF") #is this not used????
 
@@ -161,11 +160,17 @@ class Board < Gtk::Window
               cardRemovedFromDeck = false
               card.signal_handler_disconnect(handlerId)
             end
+            if ((foundation1.getDone == true) && (foundation2.getDone == true) && (foundation3.getDone == true) && (foundation4.getDone == true))
+              puts "WINNER"
+              winLable = Gtk::Label.new "Congratulations you won!!!"
+              fixed.put winLable, 100, 300
+              show_all
+            end
           end
         end
       end
     end
-    
+
     wastes.each do |waste|
       
       waste.getEventBox.signal_connect("button_press_event") do |wiget, event| #dragging off of waste onto foundation       
@@ -226,6 +231,59 @@ class Board < Gtk::Window
       end
     end
 
+    # The following is for testing the win condition
+=begin
+    foundation1.addCard(deck.findAndRemoveCard(2))
+    foundation1.addCard(deck.findAndRemoveCard(3))
+    foundation1.addCard(deck.findAndRemoveCard(4))
+    foundation1.addCard(deck.findAndRemoveCard(5))
+    foundation1.addCard(deck.findAndRemoveCard(6))
+    foundation1.addCard(deck.findAndRemoveCard(7))
+    foundation1.addCard(deck.findAndRemoveCard(8))
+    foundation1.addCard(deck.findAndRemoveCard(9))
+    foundation1.addCard(deck.findAndRemoveCard(10))
+    foundation1.addCard(deck.findAndRemoveCard(11))
+    foundation1.addCard(deck.findAndRemoveCard(12))
+
+    foundation2.addCard(deck.findAndRemoveCard(4))
+    foundation2.addCard(deck.findAndRemoveCard(6))
+    foundation2.addCard(deck.findAndRemoveCard(8))
+    foundation2.addCard(deck.findAndRemoveCard(10))
+    foundation2.addCard(deck.findAndRemoveCard(12))
+    foundation2.addCard(deck.findAndRemoveCard(1))
+    foundation2.addCard(deck.findAndRemoveCard(3))
+    foundation2.addCard(deck.findAndRemoveCard(5))
+    foundation2.addCard(deck.findAndRemoveCard(7))
+    foundation2.addCard(deck.findAndRemoveCard(9))
+    foundation2.addCard(deck.findAndRemoveCard(11))
+
+    foundation3.addCard(deck.findAndRemoveCard(6))
+    foundation3.addCard(deck.findAndRemoveCard(9))
+    foundation3.addCard(deck.findAndRemoveCard(12))
+    foundation3.addCard(deck.findAndRemoveCard(2))
+    foundation3.addCard(deck.findAndRemoveCard(5))
+    foundation3.addCard(deck.findAndRemoveCard(8))
+    foundation3.addCard(deck.findAndRemoveCard(11))
+    foundation3.addCard(deck.findAndRemoveCard(1))
+    foundation3.addCard(deck.findAndRemoveCard(4))
+    foundation3.addCard(deck.findAndRemoveCard(7))
+    foundation3.addCard(deck.findAndRemoveCard(10))
+
+    foundation4.addCard(deck.findAndRemoveCard(8))
+    foundation4.addCard(deck.findAndRemoveCard(12))
+    foundation4.addCard(deck.findAndRemoveCard(3))
+    foundation4.addCard(deck.findAndRemoveCard(7))
+    foundation4.addCard(deck.findAndRemoveCard(11))
+    foundation4.addCard(deck.findAndRemoveCard(2))
+    foundation4.addCard(deck.findAndRemoveCard(6))
+    foundation4.addCard(deck.findAndRemoveCard(10))
+    foundation4.addCard(deck.findAndRemoveCard(1))
+    foundation4.addCard(deck.findAndRemoveCard(5))
+    foundation4.addCard(deck.findAndRemoveCard(9))
+=end
+
+
     show_all
   end
 end
+

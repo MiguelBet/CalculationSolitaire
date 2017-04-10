@@ -79,7 +79,7 @@ class Deck < Gtk::Fixed
 
   def findAndRemoveCard value
 
-    for i in 1...@currentDeck.length
+    for i in 0...@currentDeck.length
       if @currentDeck[i].get_value == value
         cardToSend = @currentDeck[i]
         @currentDeck[i] = nil
@@ -88,7 +88,7 @@ class Deck < Gtk::Fixed
         return cardToSend
       end
     end
-      puts "No card of this value"
+      puts "No card of this value: " + value.to_s
   end
 
 end
