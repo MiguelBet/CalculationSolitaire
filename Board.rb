@@ -86,9 +86,11 @@ class Board < Gtk::Window
     fixed.put waste4, 700, 250
     wastes.push(waste4)
     
-    
+    cardRemovedFromDeck = false
     deck.getTopCard.signal_connect("button_press_event") do |widget, event|
-      if event.button == 1
+      if event.button == 1 && !cardRemovedFromDeck
+        cardRemovedFromDeck = true
+        
         card = deck.drawCard
         if card.parent
           card.parent.remove(card)
@@ -148,7 +150,10 @@ class Board < Gtk::Window
               if card.parent
                 card.parent.remove(card)
               end
+              #put back on face-up deck slot
               fixed.put(card, 100 + 72 + 8, 100)
+            else
+              cardRemovedFromDeck = false
             end
           end
         end
