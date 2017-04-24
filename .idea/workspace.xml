@@ -4,8 +4,6 @@
     <list default="true" id="3d80afb6-0efe-4f3a-9073-ec58f74059f5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Board.rb" afterPath="$PROJECT_DIR$/Board.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Deck.rb" afterPath="$PROJECT_DIR$/Deck.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FoundationPile.rb" afterPath="$PROJECT_DIR$/FoundationPile.rb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/CalculationSolitaire@TitlePage.coverage" NAME="TitlePage Coverage Results" MODIFIED="1491865346651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="CalculationSolitaire" />
+    <SUITE FILE_PATH="coverage/CalculationSolitaire@TitlePage.coverage" NAME="TitlePage Coverage Results" MODIFIED="1493016419783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="CalculationSolitaire" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -26,8 +24,8 @@
       <file leaf-file-name="Board.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Board.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1488">
-              <caret line="294" column="4" lean-forward="false" selection-start-line="294" selection-start-column="4" selection-end-line="294" selection-end-column="4" />
+            <state relative-caret-position="410">
+              <caret line="165" column="38" lean-forward="false" selection-start-line="165" selection-start-column="38" selection-end-line="165" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -36,7 +34,7 @@
       <file leaf-file-name="Deck.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Deck.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
+            <state relative-caret-position="1782">
               <caret line="81" column="14" lean-forward="false" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="14" />
               <folding />
             </state>
@@ -46,7 +44,7 @@
       <file leaf-file-name="FoundationPile.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FoundationPile.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
+            <state relative-caret-position="1870">
               <caret line="85" column="16" lean-forward="false" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
               <folding />
             </state>
@@ -73,7 +71,7 @@
       <file leaf-file-name="Card.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Card.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5">
+            <state relative-caret-position="1628">
               <caret line="74" column="5" lean-forward="false" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
               <folding />
             </state>
@@ -83,8 +81,8 @@
       <file leaf-file-name="TitlePage.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TitlePage.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1210">
-              <caret line="55" column="53" lean-forward="false" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
+            <state relative-caret-position="366">
+              <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="32" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -150,8 +148,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -374,11 +372,13 @@
       <workItem from="1490215879662" duration="5469000" />
       <workItem from="1490656853930" duration="1046000" />
       <workItem from="1491860898031" duration="4495000" />
+      <workItem from="1492024517846" duration="985000" />
+      <workItem from="1493011981771" duration="1445000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40418000" />
+    <option name="totallyTimeSpent" value="42848000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -416,14 +416,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/FoundationPile.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WastePile.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -729,14 +721,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TitlePage.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1210">
-          <caret line="55" column="53" lean-forward="false" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WastePile.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -747,7 +731,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Card.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
+        <state relative-caret-position="1628">
           <caret line="74" column="5" lean-forward="false" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
           <folding />
         </state>
@@ -762,13 +746,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Deck.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
+        <state relative-caret-position="1782">
           <caret line="81" column="14" lean-forward="false" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="14" />
           <folding />
         </state>
@@ -776,16 +759,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FoundationPile.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
+        <state relative-caret-position="1870">
           <caret line="85" column="16" lean-forward="false" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TitlePage.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="32" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardPics/text.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Board.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1488">
-          <caret line="294" column="4" lean-forward="false" selection-start-line="294" selection-start-column="4" selection-end-line="294" selection-end-column="4" />
+        <state relative-caret-position="410">
+          <caret line="165" column="38" lean-forward="false" selection-start-line="165" selection-start-column="38" selection-end-line="165" selection-end-column="38" />
           <folding />
         </state>
       </provider>

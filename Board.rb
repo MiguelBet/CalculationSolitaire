@@ -162,8 +162,8 @@ class Board < Gtk::Window
             end
             if ((foundation1.getDone == true) && (foundation2.getDone == true) && (foundation3.getDone == true) && (foundation4.getDone == true))
               puts "WINNER"
-              winLable = Gtk::Label.new "Congratulations you won!!!"
-              fixed.put winLable, 100, 300
+              image = Gtk::Image.new(:file => "./cardPics/winner.png")
+              fixed.put image, 75, 400
               show_all
             end
           end
@@ -206,6 +206,12 @@ class Board < Gtk::Window
                     if canMove
                       placed = true
                       card.set_draggable(false);
+                      if ((foundation1.getDone == true) && (foundation2.getDone == true) && (foundation3.getDone == true) && (foundation4.getDone == true))
+                        puts "WINNER"
+                        image = Gtk::Image.new(:file => "./cardPics/winner.png")
+                        fixed.put image, 75, 400
+                        show_all
+                      end
                       break
                     else
                       placed = false
@@ -216,6 +222,12 @@ class Board < Gtk::Window
                 if !placed
                   waste.addCard(card)
                   card.set_draggable(false)
+                  if ((foundation1.getDone == true) && (foundation2.getDone == true) && (foundation3.getDone == true) && (foundation4.getDone == true))
+                    puts "WINNER"
+                    image = Gtk::Image.new(:file => "./cardPics/winner.png")
+                    fixed.put image, 75, 400
+                    show_all
+                  end
                 end
               end
             end
@@ -229,10 +241,11 @@ class Board < Gtk::Window
           end
         end
       end
+
     end
 
     # The following is for testing the win condition
-=begin
+
     foundation1.addCard(deck.findAndRemoveCard(2))
     foundation1.addCard(deck.findAndRemoveCard(3))
     foundation1.addCard(deck.findAndRemoveCard(4))
@@ -280,7 +293,6 @@ class Board < Gtk::Window
     foundation4.addCard(deck.findAndRemoveCard(1))
     foundation4.addCard(deck.findAndRemoveCard(5))
     foundation4.addCard(deck.findAndRemoveCard(9))
-=end
 
 
     show_all
